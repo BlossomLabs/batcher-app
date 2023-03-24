@@ -6,7 +6,7 @@
     "Alejandro Santander <palebluedot@gmail.com>",
     "Olivier Sarrouy <olivier@aragon.black>"
   ],
-  "license": "(GPL-3.0-or-later OR AGPL-3.0-or-later)",
+  "license": "AGPL-3.0-or-later",
   "homepage": "https://github.com/commonsswarm/hatch-app",
   "scripts": {
     "compile": "hardhat compile",
