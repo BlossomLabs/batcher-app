@@ -1,0 +1,8 @@
+{
+  "name": "Batcher",
+  "author": "Blossom Labs",
+  "description": "Batcher enhances DAO governance efficiency by consolidating the authorization of numerous scripts into a single vote, streamlining the management and execution of interdependent actions",
+  "details_url": "/meta/details.md",
+  "source_url": "https://github.com/blossomlabs/batcher-app",
+  "icons": [{ "src": "/meta/icon.svg", "sizes": "56x56" }]
+}

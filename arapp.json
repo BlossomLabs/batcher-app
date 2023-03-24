@@ -1,0 +1,37 @@
+{
+  "environments": {
+    "localhost": {
+      "registry": "0x5f6f7e8cc7346a11ca2def8f827b7a0b612c56a1",
+      "appName": "batcher.aragonpm.eth",
+      "network": "rpc"
+    },
+    "mainnet": {
+      "registry": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
+      "appName": "batcher.open.aragonpm.eth",
+      "network": "mainnet"
+    },
+    "xdai": {
+      "registry": "0xaafca6b0c89521752e559650206d7c925fd0e530",
+      "appName": "batcher.open.aragonpm.eth",
+      "network": "xdai"
+    }
+  },
+  "roles": [
+    {
+      "name": "Add batched actions",
+      "id": "ADD_SCRIPT_ROLE",
+      "params": []
+    },
+    {
+      "name": "Authorize batched actions",
+      "id": "AUTHORIZE_SCRIPT_ROLE",
+      "params": []
+    },
+    {
+      "name": "Execute batched actions",
+      "id": "EXECUTE_SCRIPT_ROLE",
+      "params": []
+    }
+  ],
+  "path": "contracts/Batcher.sol"
+}
