@@ -185,24 +185,6 @@ contract('Batcher', ([anyone, owner]) => {
       await assertRevert(batcher.executeScript(1, EMPTY_CALLS_SCRIPT, { from: owner }), BATCHER_ERRORS.BATCHER_SCRIPT_NOT_AUTHORIZED)
     });
 
-    it("should not execute an script if its dependencies have not been executed", async function () {
-      await batcher.authorizeScript(0, { from: owner })
-      await batcher.authorizeScript(1, { from: owner })
-      await assertRevert(batcher.executeScript(1, EMPTY_CALLS_SCRIPT, { from: owner }), BATCHER_ERRORS.BATCHER_SCRIPT_DEPENDENCIES_NOT_MET)
-    });
-
-    it("should execute an script if its dependencies have been executed", async function () {
-      await batcher.addScript(EMPTY_CALLS_SCRIPT, [1], { from: owner })
-
-      await batcher.authorizeScript(0, { from: owner })
-      await batcher.authorizeScript(1, { from: owner })
-      await batcher.authorizeScript(2, { from: owner })
-      
-      await batcher.executeScript(0, EMPTY_CALLS_SCRIPT, { from: owner })
-      await batcher.executeScript(1, EMPTY_CALLS_SCRIPT, { from: owner })
-      await batcher.executeScript(2, EMPTY_CALLS_SCRIPT, { from: owner })
-    });
-
     it("should not execute an script that has already been executed", async function () {
       await batcher.authorizeScript(0, { from: owner })
       await batcher.executeScript(0, EMPTY_CALLS_SCRIPT, { from: owner })
@@ -211,6 +193,26 @@ contract('Batcher', ([anyone, owner]) => {
 
     it("should revert if the script does not exist", async function () {
       await assertRevert(batcher.executeScript(2, EMPTY_CALLS_SCRIPT, { from: owner }), BATCHER_ERRORS.BATCHER_NO_SCRIPT)
+    });
+
+    context('when the script has dependencies', () => {
+      it("should not execute an script if its dependencies have not been executed", async function () {
+        await batcher.authorizeScript(0, { from: owner })
+        await batcher.authorizeScript(1, { from: owner })
+        await assertRevert(batcher.executeScript(1, EMPTY_CALLS_SCRIPT, { from: owner }), BATCHER_ERRORS.BATCHER_SCRIPT_DEPENDENCIES_NOT_MET)
+      });
+
+      it("should execute an script if its dependencies have been executed", async function () {
+        await batcher.addScript(EMPTY_CALLS_SCRIPT, [1], { from: owner })
+
+        await batcher.authorizeScript(0, { from: owner })
+        await batcher.authorizeScript(1, { from: owner })
+        await batcher.authorizeScript(2, { from: owner })
+        
+        await batcher.executeScript(0, EMPTY_CALLS_SCRIPT, { from: owner })
+        await batcher.executeScript(1, EMPTY_CALLS_SCRIPT, { from: owner })
+        await batcher.executeScript(2, EMPTY_CALLS_SCRIPT, { from: owner })
+      });
     });
   });
 
